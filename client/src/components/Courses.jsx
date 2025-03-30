@@ -11,8 +11,7 @@ const Courses = () => {
                 if (response.status === 200) {
                     const fetchedData = await response.json();
                     setData(fetchedData);
-                    fetchedData.forEach(course => { console.log(course.title) });
-                    // console.log(JSON.stringify(data, null, 2));
+                    // console.log(JSON.stringify(fetchedData, null, 2));
                 } else if (response.status === 400) {
                     console.log("Sorry! Page not found");
                 } else {
@@ -26,7 +25,7 @@ const Courses = () => {
     }, []);
 
     return (
-        <main>
+        < main >
             <div className="wrap main--grid">
                 {data ? (
                     <>
