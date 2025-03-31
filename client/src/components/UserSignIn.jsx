@@ -1,10 +1,12 @@
-import { useRef } from "react";
-import { Link } from "react-router-dom";
+import { useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const UserSignIn = () => {
     const emailAddress = useRef(null);
     const password = useRef(null);
+    const [errors, setErrors] = useState([]);
+    const navigate = useNavigate();
 
     // event handlers
     const handleSubmit = async (event) => {
@@ -28,16 +30,15 @@ const UserSignIn = () => {
         try {
             if (response.status === 200) {
                 const user = await response.json();
-                console.log(user);
-                // console.log(`SUCCESS! ${user.} is now signed in!)
+                console.log(`SUCCESS! ${user.firstName} ${user.lastName} is now signed in!`);
             } else if (response.status === 401) {
-                const data = await response.json();
-                console.log(data);
+                setErrors(["Sign-in was unsuccessful"]);
             } else {
                 throw new Error();
             }
         } catch (error) {
             console.log(error);
+            navigate("/error");
         }
     }
 
@@ -45,7 +46,13 @@ const UserSignIn = () => {
         <main>
             <div className="form--centered">
                 <h2>Sign In</h2>
-
+                {errors.length ? (
+                    <div>
+                        <ul>
+                            {errors.map((error, i) => <li key={i}>{error}</li>)}
+                        </ul>
+                    </div>
+                ) : null}
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="emailAddress">Email Address</label>
                     <input
