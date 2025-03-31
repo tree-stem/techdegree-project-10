@@ -31,6 +31,7 @@ const UserSignIn = () => {
             if (response.status === 200) {
                 const user = await response.json();
                 console.log(`SUCCESS! ${user.firstName} ${user.lastName} is now signed in!`);
+                navigate("/");
             } else if (response.status === 401) {
                 setErrors(["Sign-in was unsuccessful"]);
             } else {
@@ -40,6 +41,11 @@ const UserSignIn = () => {
             console.log(error);
             navigate("/error");
         }
+    }
+
+    const handleCancel = (event) => {
+        event.preventDefault();
+        navigate("/");
     }
 
     return (
@@ -69,7 +75,7 @@ const UserSignIn = () => {
                         ref={password}
                     />
                     <button className="button" type="submit">Sign In</button>
-                    <button className="button button-secondary">Cancel</button>
+                    <button className="button button-secondary" onClick={handleCancel}>Cancel</button>
                 </form>
                 <p>Don't have a user account? Click here to <Link to="signup">sign up!</Link></p>
 
