@@ -48,14 +48,6 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
       allowNull: false,
-      set(value) {
-        if (value.length < 8 || value.length > 20) {
-          throw new Error('Password must be between 8 and 20 characters in length.');
-        } else {
-          const hashedPassword = bcrypt.hashSync(value, 10);
-          this.setDataValue('password', hashedPassword);
-        }
-      },
       validate: {
         notNull: {
           msg: 'A password is required.'
@@ -63,9 +55,27 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {
           msg: 'Please provide a value for "password".',
         },
+        len: {
+          args: [8, 20],
+          msg: 'Password must be between 8 and 20 characters in length.',
+        },
       },
     },
   }, { sequelize });
+
+  User.addHook('beforeCreate', (user) => {
+    if (user.password) {
+      const hashedPassword = bcrypt.hashSync(user.password, 10);
+      user.password = hashedPassword;
+    }
+  });
+
+  User.addHook('beforeSave', (user) => {
+    if (user.password) {
+      const hashedPassword = bcrypt.hashSync(user.password, 10);
+      user.password = hashedPassword;
+    }
+  });
 
   // Create data relationship between User and Course
   User.associate = (models) => {
