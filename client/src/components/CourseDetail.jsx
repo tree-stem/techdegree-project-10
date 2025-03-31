@@ -77,12 +77,6 @@ const CourseDetail = () => {
                 )}
         </main>
     )
-    // <main>
-
-
-
-    // </main>
-
 }
 
 export default CourseDetail
