@@ -33,6 +33,7 @@ const UserSignUp = () => {
             const response = await fetch("http://localhost:5000/api/users", fetchOptions);
             if (response.status === 201) {
                 console.log(`${user.firstName} is successfully signed up and authenticated!`);
+                navigate("/");
             } else if (response.status === 400) {
                 const data = await response.json();
                 setErrors(data.errors);
