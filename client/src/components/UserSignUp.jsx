@@ -1,5 +1,7 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
+import UserContext from "../context/UserContext";
 
 const UserSignUp = () => {
     const firstName = useRef(null);
@@ -7,6 +9,7 @@ const UserSignUp = () => {
     const emailAddress = useRef(null);
     const password = useRef(null);
     const [errors, setErrors] = useState([]);
+    const { actions } = useContext(UserContext);
 
     const navigate = useNavigate();
 
@@ -32,7 +35,7 @@ const UserSignUp = () => {
         try {
             const response = await fetch("http://localhost:5000/api/users", fetchOptions);
             if (response.status === 201) {
-                console.log(`${user.firstName} is successfully signed up and authenticated!`);
+                await actions.signIn(user);
                 navigate("/");
             } else if (response.status === 400) {
                 const data = await response.json();
