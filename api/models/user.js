@@ -63,13 +63,6 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, { sequelize });
 
-  User.addHook('beforeCreate', (user) => {
-    if (user.password) {
-      const hashedPassword = bcrypt.hashSync(user.password, 10);
-      user.password = hashedPassword;
-    }
-  });
-
   User.addHook('beforeSave', (user) => {
     if (user.password) {
       const hashedPassword = bcrypt.hashSync(user.password, 10);
