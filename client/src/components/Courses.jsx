@@ -25,7 +25,7 @@ const Courses = () => {
     }, []);
 
     return (
-        < main >
+        <main>
             <div className="wrap main--grid">
                 {data ? (
                     <>
