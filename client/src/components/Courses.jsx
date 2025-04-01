@@ -11,7 +11,6 @@ const Courses = () => {
                 if (response.status === 200) {
                     const fetchedData = await response.json();
                     setData(fetchedData);
-                    // console.log(JSON.stringify(fetchedData, null, 2));
                 } else if (response.status === 400) {
                     console.log("Sorry! Page not found");
                 } else {
