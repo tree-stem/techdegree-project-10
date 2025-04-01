@@ -2,6 +2,7 @@ import { useRef, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import UserContext from '../context/UserContext.jsx';
+import ErrorsDisplay from "./ErrorsDisplay.jsx";
 
 const CreateCourse = () => {
     const title = useRef(null);
@@ -39,7 +40,6 @@ const CreateCourse = () => {
                 navigate("/");
             } else if (response.status === 400) {
                 const data = await response.json();
-                console.log(data.errors);
                 setErrors(data.errors);
             } else {
                 throw new Error();
@@ -54,14 +54,7 @@ const CreateCourse = () => {
         <main>
             <div className="wrap">
                 <h2>Create Course</h2>
-                {errors.length ? (
-                    <div className="validation--errors">
-                        <h3>Validation Errors</h3>
-                        <ul>
-                            {errors.map((error, i) => <li key={i}>{error}</li>)}
-                        </ul>
-                    </div>
-                ) : null}
+                <ErrorsDisplay errors={errors} />
                 <form onSubmit={handleSubmit}>
                     <div className="main--flex">
                         <div>
