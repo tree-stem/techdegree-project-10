@@ -57,8 +57,9 @@ const UserSignUp = () => {
             <div className="form--centered">
                 <h2>Sign Up</h2>
                 {errors.length ? (
-                    <div>
-                        <ul>Validation Errors
+                    <div className="validation--errors">
+                        <h3>Validation Errors</h3>
+                        <ul>
                             {errors.map((error, i) => <li key={i}>{error}</li>)}
                         </ul>
                     </div>
