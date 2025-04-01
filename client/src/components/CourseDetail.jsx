@@ -1,9 +1,10 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const CourseDetail = () => {
     const { id } = useParams();
     const [course, setCourse] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchCourseData = async () => {
@@ -25,6 +26,29 @@ const CourseDetail = () => {
     }, [id]);
 
 
+    const handleDelete = async (event) => {
+        event.preventDefault();
+        const fetchOptions = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8"
+            },
+            body: JSON.stringify(course),
+        }
+
+        try {
+            const response = await fetch(`http://localhost:5000/api/courses/${id}`, fetchOptions);
+            if (response.status === 204) {
+                navigate('/');
+            } else if (response.status === 404) {
+                throw new Error();
+            }
+        } catch (error) {
+            console.log(error);
+            navigate("/error");
+        }
+    }
+
     return (
         <main>
             {course ? (
@@ -32,7 +56,7 @@ const CourseDetail = () => {
                     <div className="actions--bar">
                         <div className="wrap">
                             <Link className="button" to={`/courses/${id}/update`}>Update Course</Link>
-                            <Link className="button" to="#">Delete Course</Link>
+                            <Link className="button" to="/" onClick={handleDelete}>Delete Course</Link>
                             <Link className="button button-secondary" to="/">Return to List</Link>
                         </div>
                     </div>
