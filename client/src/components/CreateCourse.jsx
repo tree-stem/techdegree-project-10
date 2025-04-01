@@ -50,6 +50,12 @@ const CreateCourse = () => {
         }
     }
 
+    const handleCancel = (event) => {
+        event.preventDefault();
+        navigate("/");
+    }
+
+
     return (
         <main>
             <div className="wrap">
@@ -85,7 +91,7 @@ const CreateCourse = () => {
                         </div>
                     </div>
                     <button className="button" type="submit">Create Course</button>
-                    <button className="button button-secondary">Cancel</button>
+                    <button className="button button-secondary" onClick={handleCancel}>Cancel</button>
                 </form>
             </div>
         </main>
