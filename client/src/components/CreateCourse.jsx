@@ -1,5 +1,7 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+
+import UserContext from '../context/UserContext.jsx';
 
 const CreateCourse = () => {
     const title = useRef(null);
@@ -8,12 +10,14 @@ const CreateCourse = () => {
     const materialsNeeded = useRef(null);
     const navigate = useNavigate();
     const [errors, setErrors] = useState([]);
+    const { authUser } = useContext(UserContext);
 
     // event handlers
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         const course = {
+            userId: authUser.id,
             title: title.current.value,
             description: description.current.value,
             estimatedTime: estimatedTime.current.value,
@@ -35,7 +39,10 @@ const CreateCourse = () => {
                 navigate("/");
             } else if (response.status === 400) {
                 const data = await response.json();
+                console.log(data.errors);
                 setErrors(data.errors);
+            } else {
+                throw new Error();
             }
         } catch (error) {
             console.log(error);
