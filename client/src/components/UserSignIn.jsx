@@ -42,11 +42,7 @@ const UserSignIn = () => {
             <div className="form--centered">
                 <h2>Sign In</h2>
                 {errors.length ? (
-                    <div>
-                        <ul>
-                            {errors.map((error, i) => <li key={i}>{error}</li>)}
-                        </ul>
-                    </div>
+                    <div className="validation--errors">{errors}</div>
                 ) : null}
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="emailAddress">Email Address</label>
