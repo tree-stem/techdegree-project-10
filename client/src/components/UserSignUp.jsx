@@ -2,6 +2,7 @@ import { useContext, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import UserContext from "../context/UserContext";
+import ErrorsDisplay from "./ErrorsDisplay";
 
 const UserSignUp = () => {
     const firstName = useRef(null);
@@ -56,14 +57,7 @@ const UserSignUp = () => {
         <main>
             <div className="form--centered">
                 <h2>Sign Up</h2>
-                {errors.length ? (
-                    <div className="validation--errors">
-                        <h3>Validation Errors</h3>
-                        <ul>
-                            {errors.map((error, i) => <li key={i}>{error}</li>)}
-                        </ul>
-                    </div>
-                ) : null}
+                <ErrorsDisplay errors={errors} />
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="firstName">First Name</label>
                     <input

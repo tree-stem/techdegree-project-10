@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
+import ErrorsDisplay from "./ErrorsDisplay";
+
 const UpdateCourse = () => {
     const { id } = useParams();
     const [course, setCourse] = useState(null);
@@ -91,14 +93,7 @@ const UpdateCourse = () => {
                 <>
                     <div className="wrap">
                         <h2>Update Course</h2>
-                        {errors.length ? (
-                            <div className="validation--errors">
-                                <h3>Errors</h3>
-                                <ul>
-                                    {errors.map((error, i) => <li key={i}>{error}</li>)}
-                                </ul>
-                            </div>
-                        ) : null}
+                        <ErrorsDisplay errors={errors} />
                         <form onSubmit={handleSubmit}>
                             <div className="main--flex">
                                 <div>
