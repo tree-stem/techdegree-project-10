@@ -74,7 +74,7 @@ router.get('/courses/:id', asyncHandler(async (req, res) => {
 }));
 
 // Send POST request to CREATE a course
-router.post('/courses', authenticateUser, asyncHandler(async (req, res) => {
+router.post('/courses', asyncHandler(async (req, res) => {
     try {
         const course = await Course.create(req.body);
         res.location('/courses/' + course.id); // Set the location header
@@ -90,7 +90,7 @@ router.post('/courses', authenticateUser, asyncHandler(async (req, res) => {
 }));
 
 // Send PUT request to UPDATE a course
-router.put('/courses/:id', authenticateUser, asyncHandler(async (req, res) => {
+router.put('/courses/:id', asyncHandler(async (req, res) => {
     let course;
     try {
         course = await Course.findByPk(req.params.id);
@@ -113,7 +113,7 @@ router.put('/courses/:id', authenticateUser, asyncHandler(async (req, res) => {
 }));
 
 // Send a DELETE request to DELETE a course
-router.delete('/courses/:id', authenticateUser, asyncHandler(async (req, res) => {
+router.delete('/courses/:id', asyncHandler(async (req, res) => {
     const course = await Course.findByPk(req.params.id);
     if (course) {
         await course.destroy();
