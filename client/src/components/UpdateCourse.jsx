@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import ErrorsDisplay from "./ErrorsDisplay";
 
+// component to allow users to edit course details (only available to course creator)
 const UpdateCourse = () => {
     const { id } = useParams();
     const [course, setCourse] = useState(null);
@@ -13,7 +14,7 @@ const UpdateCourse = () => {
     const [materialsNeeded, setMaterialsNeeded] = useState(null);
     const navigate = useNavigate();
 
-    // fetch course data based off id paramater
+    // fetch course data based off id paramater and set properties to changed values
     useEffect(() => {
         const fetchCourseData = async () => {
             try {
@@ -38,9 +39,12 @@ const UpdateCourse = () => {
     }, [id]);
 
     // event handlers
+
+    // sends fetch request with course data and necessary headers
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        // create course object to pass to the api
         const course = {
             title,
             description,
@@ -48,6 +52,7 @@ const UpdateCourse = () => {
             materialsNeeded
         }
 
+        // object to pass PUT method, headers, and body
         const fetchOptions = {
             method: "PUT",
             headers: {
@@ -56,6 +61,7 @@ const UpdateCourse = () => {
             body: JSON.stringify(course),
         }
 
+        // fetch request to api endpoint to handle put methods
         try {
             const response = await fetch(`http://localhost:5000/api/courses/${id}`, fetchOptions);
             if (response.status === 204) {
@@ -73,11 +79,13 @@ const UpdateCourse = () => {
         }
     }
 
+    // event handler to navigate user back to course detail page
     const handleCancel = (event) => {
         event.preventDefault();
         navigate(`/courses/${id}`)
     }
 
+    // handlers for each course property to store any changes
     const handleTitleChange = (event) => {
         setTitle(event.target.value);
     }
@@ -94,6 +102,7 @@ const UpdateCourse = () => {
         setMaterialsNeeded(event.target.value);
     }
 
+    // render html and include after course data has loaded and pass event handlers
     return (
         <main>
             {course ? (

@@ -2,7 +2,9 @@ import { useContext, useRef, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import UserContext from "../context/UserContext";
+import ErrorsDisplay from "./ErrorsDisplay";
 
+// component that authenticates users to site comparing credentials to user information
 const UserSignIn = () => {
     const emailAddress = useRef(null);
     const password = useRef(null);
@@ -12,18 +14,24 @@ const UserSignIn = () => {
     const { actions } = useContext(UserContext);
 
     // event handlers
+
+    // handles form submits and directs users to respested site or displays errors
     const handleSubmit = async (event) => {
         event.preventDefault();
         let from = '/';
+
+        // store location information in state and store it in a variable
         if (location.state) {
             from = location.state.from;
         }
 
+        // object that holds user input for authentication purposes
         const credentials = {
             emailAddress: emailAddress.current.value,
             password: password.current.value
         }
 
+        // async/await function that uses context functions to authenticate user by passing user credentials
         try {
             const user = await actions.signIn(credentials);
             if (user) {
@@ -37,18 +45,18 @@ const UserSignIn = () => {
         }
     }
 
+    // cancel function redirecting user to home page
     const handleCancel = (event) => {
         event.preventDefault();
         navigate("/");
     }
 
+    // render html and ErrorDisplay component to display any errors first
     return (
         <main>
             <div className="form--centered">
                 <h2>Sign In</h2>
-                {errors.length ? (
-                    <div className="validation--errors">{errors}</div>
-                ) : null}
+                <ErrorsDisplay errors={errors} />
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="emailAddress">Email Address</label>
                     <input

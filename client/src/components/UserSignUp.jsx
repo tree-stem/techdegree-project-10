@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import ErrorsDisplay from "./ErrorsDisplay";
 
+// component to ask users for information to successfully sign up
 const UserSignUp = () => {
     const firstName = useRef(null);
     const lastName = useRef(null);
@@ -15,9 +16,12 @@ const UserSignUp = () => {
     const navigate = useNavigate();
 
     // event handlers
+
+    // handles form submits and sends a POST request to the database to save user information
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        // create user object to store user inputs in their respected fields
         const user = {
             firstName: firstName.current.value,
             lastName: lastName.current.value,
@@ -25,6 +29,7 @@ const UserSignUp = () => {
             password: password.current.value,
         }
 
+        // options object to send POST method, headers, and body
         const fetchOptions = {
             method: "POST",
             headers: {
@@ -33,6 +38,7 @@ const UserSignUp = () => {
             body: JSON.stringify(user),
         }
 
+        // fetch request to the endpoint that handles POST methods and sends the proper response
         try {
             const response = await fetch("http://localhost:5000/api/users", fetchOptions);
             if (response.status === 201) {
@@ -48,11 +54,13 @@ const UserSignUp = () => {
         }
     }
 
+    // event handler that directs user back to home page 
     const handleCancel = (event) => {
         event.preventDefault();
         navigate("/");
     }
 
+    // render html with ref properties for each field input
     return (
         <main>
             <div className="form--centered">

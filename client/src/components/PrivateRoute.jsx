@@ -3,6 +3,7 @@ import { Outlet, Navigate, useLocation } from "react-router-dom";
 
 import UserContext from "../context/UserContext"
 
+// create a private route to only allow access to signed in users
 const PrivateRoute = () => {
     const { authUser } = useContext(UserContext);
     const location = useLocation();

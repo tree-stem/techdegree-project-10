@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+// Home page component rendering all the courses available
 const Courses = () => {
     const [data, setData] = useState(null);
 
-    // fetch course data each page load
+    // fetch course data when page renders
     useEffect(() => {
+        // fetch data from api and respond to each status outcome
         const fetchCourses = async () => {
             try {
                 const response = await fetch("http://localhost:5000/api/courses");
@@ -24,6 +26,7 @@ const Courses = () => {
         fetchCourses();
     }, []);
 
+    // return html after data is finished loading
     return (
         <main>
             <div className="wrap main--grid">

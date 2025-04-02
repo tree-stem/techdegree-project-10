@@ -14,9 +14,12 @@ const CreateCourse = () => {
     const { authUser } = useContext(UserContext);
 
     // event handlers
+
+    // sends course information to api to check if form was properly filled out
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        // create course object to handle any user inputs using useRef
         const course = {
             userId: authUser.id,
             title: title.current.value,
@@ -25,6 +28,7 @@ const CreateCourse = () => {
             materialsNeeded: materialsNeeded.current.value
         }
 
+        // variable holding necessary request information to include in the fetch request
         const fetchOptions = {
             method: "POST",
             headers: {
@@ -33,6 +37,7 @@ const CreateCourse = () => {
             body: JSON.stringify(course),
         }
 
+        // make fetch request to api and navigate user to either home page or display errors
         try {
             const response = await fetch("http://localhost:5000/api/courses", fetchOptions);
             if (response.status === 201) {
@@ -50,12 +55,14 @@ const CreateCourse = () => {
         }
     }
 
+    // event handler to bring user back to home page
     const handleCancel = (event) => {
         event.preventDefault();
         navigate("/");
     }
 
 
+    // render html with editable input fields
     return (
         <main>
             <div className="wrap">
