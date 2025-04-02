@@ -4,14 +4,16 @@ import ReactMarkdown from "react-markdown";
 
 import UserContext from '../context/UserContext';
 
+// renders individual course information by using the id parameter
 const CourseDetail = () => {
     const { id } = useParams();
     const [course, setCourse] = useState(null);
     const { authUser } = useContext(UserContext);
     const navigate = useNavigate();
 
-    // fetch course data based off id parameter
+    // fetch course data based off id parameter when page loads or changes id
     useEffect(() => {
+        // fetch individual course data and respond to different status outcomes
         const fetchCourseData = async () => {
             try {
                 const response = await fetch(`http://localhost:5000/api/courses/${id}`);
@@ -55,6 +57,7 @@ const CourseDetail = () => {
         }
     }
 
+    // renders html after first checking if user is signed in and if the signed in user's id matches the course userId
     return (
         <main>
             {authUser ? (
@@ -81,7 +84,7 @@ const CourseDetail = () => {
                                 <h4 className="course--name">{course.title}</h4>
                                 <p>{`By ${course.User.firstName} ${course.User.lastName}`}</p>
 
-                                <p><ReactMarkdown>{course.description}</ReactMarkdown></p>
+                                <ReactMarkdown>{course.description}</ReactMarkdown>
                             </div>
                             <div>
                                 <h3 className="course--detail--title">Estimated Time</h3>
