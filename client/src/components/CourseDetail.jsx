@@ -1,5 +1,6 @@
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
+import ReactMarkdown from "react-markdown";
 
 import UserContext from '../context/UserContext';
 
@@ -80,7 +81,7 @@ const CourseDetail = () => {
                                 <h4 className="course--name">{course.title}</h4>
                                 <p>{`By ${course.User.firstName} ${course.User.lastName}`}</p>
 
-                                <p>{course.description}</p>
+                                <p><ReactMarkdown>{course.description}</ReactMarkdown></p>
                             </div>
                             <div>
                                 <h3 className="course--detail--title">Estimated Time</h3>
@@ -89,12 +90,7 @@ const CourseDetail = () => {
                                 <h3 className="course--detail--title">Materials Needed</h3>
                                 {course.materialsNeeded && (
                                     <ul className="course--detail--list">
-                                        {course.materialsNeeded
-                                            .split("\n")
-                                            .filter(material => material.trim() !== "")
-                                            .map((material, index) => (
-                                                <li key={index}>{material.replace(/^\* /, "")}</li>
-                                            ))}
+                                        <ReactMarkdown>{course.materialsNeeded}</ReactMarkdown>
                                     </ul>
                                 )}
                             </div>
