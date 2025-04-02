@@ -13,6 +13,7 @@ const UpdateCourse = () => {
     const [materialsNeeded, setMaterialsNeeded] = useState(null);
     const navigate = useNavigate();
 
+    // fetch course data based off id paramater
     useEffect(() => {
         const fetchCourseData = async () => {
             try {
@@ -36,6 +37,7 @@ const UpdateCourse = () => {
         fetchCourseData();
     }, [id]);
 
+    // event handlers
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -69,6 +71,11 @@ const UpdateCourse = () => {
             console.log(error);
             navigate("/error");
         }
+    }
+
+    const handleCancel = (event) => {
+        event.preventDefault();
+        navigate(`/courses/${id}`)
     }
 
     const handleTitleChange = (event) => {
@@ -126,7 +133,7 @@ const UpdateCourse = () => {
                                 </div>
                             </div>
                             <button className="button" type="submit">Update Course</button>
-                            <button className="button button-secondary">Cancel</button>
+                            <button className="button button-secondary" onClick={handleCancel}>Cancel</button>
                         </form>
                     </div>
                 </>

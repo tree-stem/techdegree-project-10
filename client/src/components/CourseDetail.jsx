@@ -9,6 +9,7 @@ const CourseDetail = () => {
     const { authUser } = useContext(UserContext);
     const navigate = useNavigate();
 
+    // fetch course data based off id parameter
     useEffect(() => {
         const fetchCourseData = async () => {
             try {
@@ -29,6 +30,7 @@ const CourseDetail = () => {
 
     }, [id]);
 
+    // handle DELETE request and return user to home page
     const handleDelete = async (event) => {
         event.preventDefault();
         const fetchOptions = {

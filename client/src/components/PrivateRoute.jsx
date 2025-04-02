@@ -7,6 +7,7 @@ const PrivateRoute = () => {
     const { authUser } = useContext(UserContext);
     const location = useLocation();
 
+    // add conditional statement to direct user to appropriate route based off authentication
     if (authUser) {
         return <Outlet />
     } else {

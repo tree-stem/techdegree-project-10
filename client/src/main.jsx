@@ -5,9 +5,11 @@ import { UserProvider } from './context/UserContext.jsx';
 
 import App from './App.jsx'
 
+// import stylesheets from styles folder
 import './styles/reset.css';
 import './styles/global.css';
 
+// wrap app in UserProvider to provide context
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>

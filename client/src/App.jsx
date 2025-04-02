@@ -1,5 +1,6 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 
+// import components
 import Header from "./components/Header"
 import Courses from "./components/Courses";
 import CourseDetail from "./components/CourseDetail";

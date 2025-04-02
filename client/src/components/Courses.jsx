@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 const Courses = () => {
     const [data, setData] = useState(null);
 
+    // fetch course data each page load
     useEffect(() => {
         const fetchCourses = async () => {
             try {
