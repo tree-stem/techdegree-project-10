@@ -1,6 +1,7 @@
 const ErrorsDisplay = ({ errors }) => {
     let errorsDisplay = null;
 
+    // check if theres errors to display
     if (errors.length) {
         errorsDisplay = (
             <>

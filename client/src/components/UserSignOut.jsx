@@ -6,6 +6,7 @@ import UserContext from "../context/UserContext"
 const UserSignOut = () => {
     const { actions } = useContext(UserContext);
 
+    // use context to call sign out function
     useEffect(() => actions.signOut());
 
     return <Navigate to="/" replace />
