@@ -17,7 +17,7 @@ const app = express();
 app.use(express.json());
 
 const corsOption = {
-  origin: 'https://client-production-e6fe.up.railway.app/',
+  origin: 'https://client-production-e6fe.up.railway.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 };
