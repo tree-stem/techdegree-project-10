@@ -16,7 +16,7 @@ const app = express();
 // Express middleware
 app.use(express.json());
 
-const corsOption = {
+const corsOptions = {
   origin: 'https://client-production-e6fe.up.railway.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
