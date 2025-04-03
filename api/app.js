@@ -16,7 +16,13 @@ const app = express();
 // Express middleware
 app.use(express.json());
 
-app.use(cors());
+const corsOption = {
+  origin: 'https://client-production-e6fe.up.railway.app/',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 // setup morgan which gives us http request logging
 app.use(morgan('dev'));
