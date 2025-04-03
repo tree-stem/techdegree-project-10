@@ -10,7 +10,7 @@ const Courses = () => {
         // fetch data from api and respond to each status outcome
         const fetchCourses = async () => {
             try {
-                const response = await fetch("http://localhost:5000/api/courses");
+                const response = await fetch("https://techdegree-project-10-production.up.railway.app/api/courses");
                 if (response.status === 200) {
                     const fetchedData = await response.json();
                     setData(fetchedData);

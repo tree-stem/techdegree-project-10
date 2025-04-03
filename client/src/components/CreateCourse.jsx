@@ -39,7 +39,7 @@ const CreateCourse = () => {
 
         // make fetch request to api and navigate user to either home page or display errors
         try {
-            const response = await fetch("http://localhost:5000/api/courses", fetchOptions);
+            const response = await fetch("https://techdegree-project-10-production.up.railway.app/api/courses", fetchOptions);
             if (response.status === 201) {
                 console.log("course was successfully created!")
                 navigate("/");

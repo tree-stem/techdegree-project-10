@@ -40,7 +40,7 @@ const UserSignUp = () => {
 
         // fetch request to the endpoint that handles POST methods and sends the proper response
         try {
-            const response = await fetch("http://localhost:5000/api/users", fetchOptions);
+            const response = await fetch("https://techdegree-project-10-production.up.railway.app/api/users", fetchOptions);
             if (response.status === 201) {
                 await actions.signIn(user);
                 navigate("/");

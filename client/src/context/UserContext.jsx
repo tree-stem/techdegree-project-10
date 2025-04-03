@@ -15,7 +15,7 @@ export const UserProvider = (props) => {
             }
         }
 
-        const response = await fetch("http://localhost:5000/api/users", fetchOptions);
+        const response = await fetch("https://techdegree-project-10-production.up.railway.app/api/users", fetchOptions);
         if (response.status === 200) {
             const user = await response.json();
             setAuthUser(user);

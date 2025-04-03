@@ -16,7 +16,7 @@ const CourseDetail = () => {
         // fetch individual course data and respond to different status outcomes
         const fetchCourseData = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/courses/${id}`);
+                const response = await fetch(`https://techdegree-project-10-production.up.railway.app/api/courses/${id}`);
                 if (response.status === 200) {
                     const fetchedData = await response.json();
                     setCourse(fetchedData);
@@ -45,7 +45,7 @@ const CourseDetail = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:5000/api/courses/${id}`, fetchOptions);
+            const response = await fetch(`https://techdegree-project-10-production.up.railway.app/api/courses/${id}`, fetchOptions);
             if (response.status === 204) {
                 navigate('/');
             } else if (response.status === 404) {
