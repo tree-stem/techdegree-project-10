@@ -79,7 +79,7 @@ const CreateCourse = () => {
                                 ref={title}
                             />
 
-                            <p>By Joe Smith</p>
+                            <p>By {`${authUser.firstName} ${authUser.lastName}`}</p>
 
                             <label htmlFor="courseDescription">Course Description</label>
                             <textarea id="courseDescription" name="courseDescription" ref={description}></textarea>
