@@ -1,2 +1,2 @@
 # Techdegree Project 10
-Full Stack course managing app built with React and a REST API.
+Course managing app built with React and a REST API that allows users to interact with a school database to view a list of courses and the details for a specific course. Users can also sign up to create an account or sign in to an existing one and perform CRUD operations such as creating, updating, and deleting courses.
